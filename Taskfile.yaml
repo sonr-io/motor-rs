@@ -1,0 +1,21 @@
+version: '3'
+
+tasks:
+
+  build:
+    cmds:
+      - cargo build
+
+  build:release:
+    cmds:
+      - cargo build --release
+
+  build:ios:
+
+  build:android:
+
+  build:wasm:
+
+  gen:protos:
+    cmds:
+      - protoc --rust_out ./prs/src ./proto/**/*/*.proto
