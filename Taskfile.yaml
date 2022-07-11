@@ -11,11 +11,23 @@ tasks:
       - cargo build --release
 
   build:ios:
+    cmds:
+      - cbindgen --crate motor-mobile --output motor-mobile/motor.h
+      - cargo build --release
 
   build:android:
 
   build:wasm:
+    dir: motor-wasm
+    cmds:
+      - RUSTFLAGS='-C target-feature=+atomics,+bulk-memory,+mutable-globals' rustup run nightly-2022-04-07 wasm-pack build . --target web -- -Z build-std=panic_abort,std
+      # - RUSTFLAGS='-C target-feature=+atomics,+bulk-memory,+mutable-globals' rustup run nightly-2021-02-11 wasm-pack build . --target web -- -Z build-std=panic_abort,std
 
   gen:protos:
     cmds:
       - protoc --rust_out ./prs/src ./proto/**/*/*.proto
+
+  serve:wasm:
+    dir: motor-wasm
+    cmds:
+      - http-server

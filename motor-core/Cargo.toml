@@ -7,3 +7,4 @@ edition = "2021"
 
 [dependencies]
 prs = { path = "../prs" }
+rayon = "1.5"

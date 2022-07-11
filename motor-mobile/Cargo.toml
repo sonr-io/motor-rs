@@ -3,12 +3,12 @@ name = "motor-mobile"
 version = "0.1.0"
 edition = "2021"
 
+[lib]
+crate-type = ["staticlib"]
+
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 motor-core = { path = "../motor-core" }
 prs = { path = "../prs" }
 protobuf = { git = "https://github.com/stepancheg/rust-protobuf.git", branch = "master" }
-# bytes = { version = "1.0", default-features = false }
-# prost = { version = "0.10", default-features = false }
-
