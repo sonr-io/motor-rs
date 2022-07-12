@@ -5,4 +5,5 @@ edition = "2021"
 
 [dependencies]
 prs = { path = "../prs" }
+aes-gcm = "0.9.4"
 scrypt = { version = "0.2", default-features = false }
