@@ -3,18 +3,16 @@ use aes_gcm::{Aes256Gcm, Key, Nonce}; // Or `Aes128Gcm`
 use std::error::Error;
 use std::fmt;
 
-pub fn aes_encrypt_with_key(key: &[u8; 32]) {
+pub fn aes_encrypt_with_key(key: &[u8; 32], plain: Vec<u8>) -> Vec<u8> {
     let cipher = Aes256Gcm::new(key.into());
-
     let nonce = Nonce::from_slice(b"unique nonce"); // 96-bits; unique per message
 
-    let ciphertext = cipher
-        .encrypt(nonce, b"plaintext message".as_ref())
-        .expect("encryption failure!"); // NOTE: handle this error to avoid panics!
+    return cipher.encrypt(nonce, plain.as_ref()).unwrap();
+}
 
-    let plaintext = cipher
-        .decrypt(nonce, ciphertext.as_ref())
-        .expect("decryption failure!"); // NOTE: handle this error to avoid panics!
+pub fn aes_decrypt_with_key(key: &[u8; 32], ciphertext: Vec<u8>) -> Vec<u8> {
+    let cipher = Aes256Gcm::new(key.into());
+    let nonce = Nonce::from_slice(b"unique nonce"); // 96-bits; unique per message
 
-    assert_eq!(&plaintext, b"plaintext message");
+    return cipher.decrypt(nonce, ciphertext.as_ref()).unwrap();
 }
