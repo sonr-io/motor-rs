@@ -1,6 +1,7 @@
 [workspace]
 members = [
   "motor-core",
+  "motor-crypto",
   "motor-mobile",
-  "motor-wasm"
+  "motor-wasm",
 ]
